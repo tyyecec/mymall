@@ -1,0 +1,27 @@
+{
+    "apps": [{
+        "name": "mymall",
+        "script": "./build/dev-server.js",
+        "env": {
+            "COMMON_VARIABLE": "true"
+        },
+        "env_production": {
+            "NODE_ENV": "production"
+        }
+    }],
+    "deploy": {
+        "production": {
+            "user": "tyy",
+            "host": ["180.76.159.225"],
+            "port": "10180",
+            "ref": "origin/master",
+            "repo": "git@gitee.com:taoyiyun/mymall.git",
+            "path": "/www/mymall/production",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": "npm install --registry=https://registry.npm.taobao.org && pm2 startOrRestart ecosystem.json --env production",
+            "env":{
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}
